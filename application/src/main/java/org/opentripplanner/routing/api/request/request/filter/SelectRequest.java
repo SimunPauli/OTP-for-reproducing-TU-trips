@@ -22,6 +22,8 @@ public class SelectRequest implements Serializable {
   private final List<FeedScopedId> agencies;
   private final List<FeedScopedId> groupOfRoutes;
   private final List<FeedScopedId> routes;
+  private final List<String> routeShortNames;
+
 
   public SelectRequest(Builder builder) {
     if (builder.transportModes.isEmpty()) {
@@ -36,6 +38,7 @@ public class SelectRequest implements Serializable {
     this.agencies = List.copyOf(builder.agencies);
     this.groupOfRoutes = List.copyOf(builder.groupOfRoutes);
     this.routes = builder.routes;
+    this.routeShortNames = List.copyOf(builder.routeShortNames);
   }
 
   public boolean matches(TripPattern tripPattern) {
@@ -54,6 +57,12 @@ public class SelectRequest implements Serializable {
     }
 
     if (!routes.isEmpty() && !routes.contains(tripPattern.getRoute().getId())) {
+      return false;
+    }
+
+    if (!routeShortNames.isEmpty() &&
+      (tripPattern.getRoute().getShortName() == null ||
+      !routeShortNames.contains(tripPattern.getRoute().getShortName()))) {
       return false;
     }
 
@@ -148,6 +157,7 @@ public class SelectRequest implements Serializable {
     private List<FeedScopedId> agencies = new ArrayList<>();
     private List<FeedScopedId> groupOfRoutes = new ArrayList<>();
     private List<FeedScopedId> routes = new ArrayList<>();
+    private List<String> routeShortNames = new ArrayList<>();
 
     public Builder withTransportModes(List<MainAndSubMode> transportModes) {
       this.transportModes = transportModes;
@@ -180,6 +190,11 @@ public class SelectRequest implements Serializable {
 
     public Builder withRoutes(List<FeedScopedId> routes) {
       this.routes = routes;
+      return this;
+    }
+
+    public Builder withRouteShortNames(List<String> routeShortNames) {
+      this.routeShortNames = routeShortNames;
       return this;
     }
 

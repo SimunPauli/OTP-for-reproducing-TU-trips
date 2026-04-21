@@ -309,6 +309,7 @@ public class QuayType {
               departuresPerLineAndDestinationDisplay,
               whiteListed.authorityIds,
               whiteListed.lineIds,
+              whiteListed.routeShortNames,
               transitModes,
               environment
             )

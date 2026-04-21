@@ -56,6 +56,14 @@ class TransitFilterOldWayMapper {
       selectorBuilders.add(SelectRequest.of().withRoutes(whiteListedLines));
     }
 
+    var whiteListedShortNames = new ArrayList<String>();
+    callWith.argument("whiteListed.routeShortNames", (List<String> names) ->
+      whiteListedShortNames.addAll(names)
+    );
+    if (!whiteListedShortNames.isEmpty()) {
+      selectorBuilders.add(SelectRequest.of().withRouteShortNames(whiteListedShortNames));
+    }
+
     // Create modes filter for the request
     final var tModes = mapTransitModes(environment);
     if (tModes.isEmpty()) {
