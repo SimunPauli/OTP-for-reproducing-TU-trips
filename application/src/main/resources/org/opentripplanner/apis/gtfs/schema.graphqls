@@ -4743,6 +4743,11 @@ input TransitFilterSelectInput @oneOf {
   Format: `FeedId:AgencyId`
   """
   routes: [String!]
+
+  """
+  Filter by route name. Using route_short_name in GTFS.
+  """
+  routeShortNames: [String!]
 }
 
 "Costs related to using a transit mode."

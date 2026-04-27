@@ -19,13 +19,15 @@ class SelectRequestMapper {
   ) {
     var routes = input.getGraphQLRoutes();
     var agencies = input.getGraphQLAgencies();
+    var routeShortNames = input.getGraphQLRouteShortNames();
+
     requireNullOrNonEmpty(routes, "preferences.transit.filters.%s.routes".formatted(name));
     requireNullOrNonEmpty(agencies, "preferences.transit.filters.%s.agencies".formatted(name));
-
-    if (CollectionUtils.isEmpty(routes) && CollectionUtils.isEmpty(agencies)) {
+    requireNullOrNonEmpty(routeShortNames, "preferences.transit.filters.%s.routeShortNames".formatted(name));
+    if (CollectionUtils.isEmpty(routes) && CollectionUtils.isEmpty(agencies) && CollectionUtils.isEmpty(routeShortNames)) {
       var type = GraphQLUtils.typeName(input);
       throw new IllegalArgumentException(
-        "%s must contain at least one element in either 'routes or 'agencies'.".formatted(type)
+        "%s must contain at least one element in either 'routes', 'agencies' or 'routeShortNames'.".formatted(type)
       );
     }
 
@@ -37,6 +39,10 @@ class SelectRequestMapper {
 
     if (CollectionUtils.hasValue(agencies)) {
       selectRequestBuilder.withAgencies(FeedScopedId.parse(agencies));
+    }
+
+    if (CollectionUtils.hasValue(routeShortNames)) {
+      selectRequestBuilder.withRouteShortNames(routeShortNames);
     }
 
     return selectRequestBuilder;
