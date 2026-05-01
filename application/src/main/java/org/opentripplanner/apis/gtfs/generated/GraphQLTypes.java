@@ -1090,6 +1090,7 @@ public class GraphQLTypes {
     private Double GONDOLA;
     private Double MONORAIL;
     private Double RAIL;
+    private Double S_TRAIN;
     private Double SUBWAY;
     private Double TAXI;
     private Double TRAM;
@@ -1107,6 +1108,7 @@ public class GraphQLTypes {
         this.GONDOLA = (Double) args.get("GONDOLA");
         this.MONORAIL = (Double) args.get("MONORAIL");
         this.RAIL = (Double) args.get("RAIL");
+        this.S_TRAIN = (Double) args.get("S_TRAIN");
         this.SUBWAY = (Double) args.get("SUBWAY");
         this.TAXI = (Double) args.get("TAXI");
         this.TRAM = (Double) args.get("TRAM");
@@ -1153,6 +1155,8 @@ public class GraphQLTypes {
     public Double getGraphQLRail() {
       return this.RAIL;
     }
+
+    public Double getGraphQLStrain() {return this.S_TRAIN;}
 
     public Double getGraphQLSubway() {
       return this.SUBWAY;
@@ -1209,6 +1213,8 @@ public class GraphQLTypes {
     public void setGraphQLRail(Double RAIL) {
       this.RAIL = RAIL;
     }
+
+    public void setGraphQLStrain(Double STRAIN) {this.S_TRAIN = S_TRAIN;}
 
     public void setGraphQLSubway(Double SUBWAY) {
       this.SUBWAY = SUBWAY;
@@ -1567,6 +1573,7 @@ public class GraphQLTypes {
     LEG_SWITCH,
     MONORAIL,
     RAIL,
+    S_TRAIN,
     SCOOTER,
     SUBWAY,
     TAXI,
@@ -5257,6 +5264,7 @@ public class GraphQLTypes {
     GONDOLA,
     MONORAIL,
     RAIL,
+    S_TRAIN,
     SUBWAY,
     TAXI,
     TRAM,

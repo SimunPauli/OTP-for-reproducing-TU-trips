@@ -21,6 +21,7 @@ import static org.opentripplanner.transit.model.basic.TransitMode.FUNICULAR;
 import static org.opentripplanner.transit.model.basic.TransitMode.GONDOLA;
 import static org.opentripplanner.transit.model.basic.TransitMode.MONORAIL;
 import static org.opentripplanner.transit.model.basic.TransitMode.RAIL;
+import static org.opentripplanner.transit.model.basic.TransitMode.S_TRAIN;
 import static org.opentripplanner.transit.model.basic.TransitMode.SUBWAY;
 import static org.opentripplanner.transit.model.basic.TransitMode.TRAM;
 import static org.opentripplanner.transit.model.basic.TransitMode.TROLLEYBUS;
@@ -204,6 +205,7 @@ class QualifiedModeSetTest {
       FUNICULAR,
       TROLLEYBUS,
       MONORAIL,
+      S_TRAIN,
       TransitMode.TAXI
     );
 
@@ -230,6 +232,7 @@ class QualifiedModeSetTest {
       TROLLEYBUS,
       CARPOOL,
       MONORAIL,
+      S_TRAIN,
       TransitMode.TAXI
     );
 

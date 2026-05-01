@@ -7,7 +7,7 @@ public class PtModeMapper {
 
   public static VehicleModesOfTransportEnumeration map(TransitMode mode) {
     return switch (mode) {
-      case RAIL, MONORAIL -> VehicleModesOfTransportEnumeration.RAIL;
+      case RAIL, MONORAIL, S_TRAIN -> VehicleModesOfTransportEnumeration.RAIL;
       case COACH -> VehicleModesOfTransportEnumeration.COACH;
       case SUBWAY -> VehicleModesOfTransportEnumeration.METRO;
       case BUS -> VehicleModesOfTransportEnumeration.BUS;

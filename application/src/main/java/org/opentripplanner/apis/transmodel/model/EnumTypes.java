@@ -181,6 +181,7 @@ public class EnumTypes {
     .value("tram", TransitMode.TRAM)
     .value("trolleybus", TransitMode.TROLLEYBUS)
     .value("monorail", TransitMode.MONORAIL)
+    .value("s_train", TransitMode.S_TRAIN)
     .value("coach", TransitMode.COACH)
     .value("foot", TraverseMode.WALK)
     .value("car", TraverseMode.CAR)
@@ -443,6 +444,7 @@ public class EnumTypes {
     .value("tram", TransitMode.TRAM)
     .value("trolleybus", TransitMode.TROLLEYBUS)
     .value("monorail", TransitMode.MONORAIL)
+    .value("s_train", TransitMode.S_TRAIN)
     .value("coach", TransitMode.COACH)
     .value("unknown", "unknown")
     .build();

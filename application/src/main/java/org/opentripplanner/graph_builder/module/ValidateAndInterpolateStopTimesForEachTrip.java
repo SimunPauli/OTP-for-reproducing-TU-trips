@@ -205,7 +205,7 @@ public class ValidateAndInterpolateStopTimesForEachTrip {
         case AIRPLANE -> 1000;
         case TRAM -> 100;
         case RAIL -> 500;
-        case SUBWAY, MONORAIL, BUS, TROLLEYBUS, COACH -> 150;
+        case SUBWAY, MONORAIL, BUS, TROLLEYBUS, COACH, S_TRAIN -> 150;
         case FERRY -> 80;
         case CABLE_CAR -> 30;
         case GONDOLA, FUNICULAR -> 50;

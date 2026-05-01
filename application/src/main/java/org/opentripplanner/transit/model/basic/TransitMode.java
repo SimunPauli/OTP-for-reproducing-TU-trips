@@ -21,7 +21,8 @@ public enum TransitMode implements DocumentedEnum<TransitMode> {
   TROLLEYBUS,
   MONORAIL,
   CARPOOL,
-  TAXI;
+  TAXI,
+  S_TRAIN;
 
   private static final Set<TransitMode> ON_STREET_MODES = EnumSet.of(
     COACH,
@@ -80,6 +81,7 @@ public enum TransitMode implements DocumentedEnum<TransitMode> {
       This is currently not specified in GTFS so we use the mode type values 1550-1560 which are in the range of private taxis.
       """;
       case TAXI -> "Using a taxi service";
+      case S_TRAIN -> "S-tog (Kopenhavn), S-Bahn (DE), RER (FR)";
     };
   }
 }

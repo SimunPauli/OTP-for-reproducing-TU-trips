@@ -18,6 +18,7 @@ public class TransitModeMapper {
       case FUNICULAR -> TransitMode.FUNICULAR;
       case GONDOLA -> TransitMode.GONDOLA;
       case RAIL -> TransitMode.RAIL;
+      case S_TRAIN -> TransitMode.S_TRAIN;
       case SUBWAY -> TransitMode.SUBWAY;
       case TRAM -> TransitMode.TRAM;
       case CARPOOL -> TransitMode.CARPOOL;
@@ -37,6 +38,7 @@ public class TransitModeMapper {
       case FUNICULAR -> GraphQLTypes.GraphQLTransitMode.FUNICULAR;
       case GONDOLA -> GraphQLTypes.GraphQLTransitMode.GONDOLA;
       case RAIL -> GraphQLTypes.GraphQLTransitMode.RAIL;
+      case S_TRAIN -> GraphQLTypes.GraphQLTransitMode.S_TRAIN;
       case SUBWAY -> GraphQLTypes.GraphQLTransitMode.SUBWAY;
       case TRAM -> GraphQLTypes.GraphQLTransitMode.TRAM;
       case CARPOOL -> GraphQLTypes.GraphQLTransitMode.CARPOOL;

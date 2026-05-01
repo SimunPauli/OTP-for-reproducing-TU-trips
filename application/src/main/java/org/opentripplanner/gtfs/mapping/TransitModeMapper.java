@@ -18,7 +18,11 @@ public class TransitModeMapper {
     /* TPEG Extension  https://groups.google.com/d/msg/gtfs-changes/keT5rTPS7Y0/71uMz2l6ke0J */
     if (routeType >= 100 && routeType < 200) {
       // Railway Service
-      return TransitMode.RAIL;
+      if (routeType == 109) { //S-tog (Kopenhavn), S-Bahn (DE), RER (FR)
+        return TransitMode.S_TRAIN;
+      } else {
+        return TransitMode.RAIL;
+      }
     } else if (routeType >= 200 && routeType < 300) { //Coach Service
       return TransitMode.COACH;
     } else if (routeType >= 300 && routeType < 500) { //Suburban Railway Service and Urban Railway service
