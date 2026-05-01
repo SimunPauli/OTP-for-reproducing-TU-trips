@@ -6,6 +6,20 @@
 [![Commit activity](https://img.shields.io/github/commit-activity/y/opentripplanner/OpenTripPlanner)](https://github.com/opentripplanner/OpenTripPlanner/graphs/contributors)
 [![Docker Pulls](https://img.shields.io/docker/pulls/opentripplanner/opentripplanner)](https://hub.docker.com/r/opentripplanner/opentripplanner)
 
+
+## Modifciation of OpenTripPlanner 
+
+This project is a modified version of OpenTripPlanner 2.8.1, designed to integrate scheduled public transit 
+data in Denmark with the Danish National Transportation Survey.
+
+Unlike standard OpenTripPlanner usage, the primary purpose is not route optimization, but the
+reconstruction of respondents’ realized routes.
+
+In addition, the system is used to generate alternative routes for use in route choice models.
+
+
+## Original README of OTP
+
 OpenTripPlanner (OTP) is an open source multi-modal trip planner, focusing on travel by scheduled
 public transportation in combination with bicycling, walking, and mobility services including bike
 share and ride hailing. Its server component runs on any platform with a Java virtual machine (
