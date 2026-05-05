@@ -87,7 +87,9 @@ public class OsmTagMapper {
      * Therefore, cycleways are tagged to permit both pedestrian and bicycle traffic.
      */
     props.setProperties("highway=cycleway", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.6));
-
+    props.setProperties("highway=cycleway;bicycle=designated",
+      withModes(BICYCLE).bicycleSafety(0.6)
+    );
     /* PEDESTRIAN_AND_BICYCLE */
     props.setProperties("mtb:scale=0", pedestrianAndBicycleWayProperties);
     props.setProperties("highway=path", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.75));
@@ -543,7 +545,7 @@ public class OsmTagMapper {
     );
     props.setProperties(
       "highway=cycleway;bicycle=designated",
-      withModes(BICYCLE).bicycleSafety(0.6)
+      withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.6) //original is BICYCLE, see comment under /* BICYCLE */ above
     );
     props.setProperties(
       "highway=bridleway;bicycle=designated",
