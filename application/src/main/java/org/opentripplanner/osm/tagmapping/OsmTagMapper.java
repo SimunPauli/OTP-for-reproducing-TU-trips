@@ -62,7 +62,7 @@ public class OsmTagMapper {
     props.setProperties("mtb:scale=4", noneWayProperties);
     props.setProperties("mtb:scale=5", noneWayProperties);
     props.setProperties("mtb:scale=6", noneWayProperties);
-    props.setProperties("highway=bridleway", withModes(NONE).bicycleSafety(1.3));
+    props.setProperties("highway=bridleway", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(1.3)); //https://naturstyrelsen.dk/regler-og-tilladelser/hvor-maa-jeg-ride-i-naturen?utm_source=chatgpt.com
 
     /* PEDESTRIAN */
     props.setProperties("highway=corridor", pedestrianWayProperties);
