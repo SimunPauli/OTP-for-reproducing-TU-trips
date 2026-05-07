@@ -80,17 +80,6 @@ public class OsmTagMapper {
     /* BICYCLE */
     props.setProperties("highway=cycleway", withModes(BICYCLE).bicycleSafety(0.6));
 
-<<<<<<< HEAD
-=======
-    /*
-     * Cycleways (in Copenhagen at least) OSM data often lack corresponding pedestrian paths.
-     * In some cases, cycleways are incorrectly tagged (should be paths instead).
-     * Danish traffic regulations allow pedestrians to use cycleways when no dedicated path exists.
-     * Therefore, cycleways are tagged to permit both pedestrian and bicycle traffic.
-     */
-    props.setProperties("highway=cycleway", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.6));
-
->>>>>>> parent of 6ae0ea15ab... Allow pedestrians on cycleways: segement with highway=cycleway AND bicycle=designated also set to PEDESTRIAN_AND_BICYCLE. See previous commit.
     /* PEDESTRIAN_AND_BICYCLE */
     props.setProperties("mtb:scale=0", pedestrianAndBicycleWayProperties);
     props.setProperties("highway=path", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.75));
