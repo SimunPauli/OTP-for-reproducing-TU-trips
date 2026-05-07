@@ -62,7 +62,7 @@ public class OsmTagMapper {
     props.setProperties("mtb:scale=4", noneWayProperties);
     props.setProperties("mtb:scale=5", noneWayProperties);
     props.setProperties("mtb:scale=6", noneWayProperties);
-    props.setProperties("highway=bridleway", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(1.3)); //https://naturstyrelsen.dk/regler-og-tilladelser/hvor-maa-jeg-ride-i-naturen?utm_source=chatgpt.com
+    props.setProperties("highway=bridleway", withModes(NONE).bicycleSafety(1.3));
 
     /* PEDESTRIAN */
     props.setProperties("highway=corridor", pedestrianWayProperties);
@@ -78,14 +78,7 @@ public class OsmTagMapper {
     props.setProperties("mtb:scale=2", pedestrianWayProperties);
 
     /* BICYCLE */
-    /*
-     * Cycleways (in Copenhagen at least) OSM data often lack corresponding pedestrian paths.
-     * In some cases, cycleways are incorrectly tagged (should be paths instead).
-     * Danish traffic regulations allow pedestrians to use cycleways when no dedicated path exists.
-     * Therefore, cycleways are tagged to permit both pedestrian and bicycle traffic.
-     */
-    //props.setProperties("highway=cycleway", withModes(BICYCLE).bicycleSafety(0.6)); //Original
-    props.setProperties("highway=cycleway", withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.6));
+    props.setProperties("highway=cycleway", withModes(BICYCLE).bicycleSafety(0.6));
 
     /* PEDESTRIAN_AND_BICYCLE */
     props.setProperties("mtb:scale=0", pedestrianAndBicycleWayProperties);
@@ -542,7 +535,7 @@ public class OsmTagMapper {
     );
     props.setProperties(
       "highway=cycleway;bicycle=designated",
-      withModes(PEDESTRIAN_AND_BICYCLE).bicycleSafety(0.6) //original is BICYCLE, see comment under /* BICYCLE */ above
+      withModes(BICYCLE).bicycleSafety(0.6)
     );
     props.setProperties(
       "highway=bridleway;bicycle=designated",
