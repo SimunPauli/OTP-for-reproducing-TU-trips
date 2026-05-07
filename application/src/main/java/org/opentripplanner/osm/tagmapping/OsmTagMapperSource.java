@@ -6,6 +6,7 @@ package org.opentripplanner.osm.tagmapping;
  */
 public enum OsmTagMapperSource {
   DEFAULT,
+  DENMARK,
   NORWAY,
   UK,
   FINLAND,
@@ -19,6 +20,7 @@ public enum OsmTagMapperSource {
   public OsmTagMapper getInstance() {
     return switch (this) {
       case DEFAULT -> new OsmTagMapper();
+      case DENMARK -> new DenmarkMapper();
       case NORWAY -> new NorwayMapper();
       case UK -> new UKMapper();
       case FINLAND -> new FinlandMapper();
