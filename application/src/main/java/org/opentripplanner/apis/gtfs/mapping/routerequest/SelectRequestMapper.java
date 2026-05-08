@@ -23,11 +23,20 @@ class SelectRequestMapper {
 
     requireNullOrNonEmpty(routes, "preferences.transit.filters.%s.routes".formatted(name));
     requireNullOrNonEmpty(agencies, "preferences.transit.filters.%s.agencies".formatted(name));
-    requireNullOrNonEmpty(routeShortNames, "preferences.transit.filters.%s.routeShortNames".formatted(name));
-    if (CollectionUtils.isEmpty(routes) && CollectionUtils.isEmpty(agencies) && CollectionUtils.isEmpty(routeShortNames)) {
+    requireNullOrNonEmpty(
+      routeShortNames,
+      "preferences.transit.filters.%s.routeShortNames".formatted(name)
+    );
+    if (
+      CollectionUtils.isEmpty(routes) &&
+      CollectionUtils.isEmpty(agencies) &&
+      CollectionUtils.isEmpty(routeShortNames)
+    ) {
       var type = GraphQLUtils.typeName(input);
       throw new IllegalArgumentException(
-        "%s must contain at least one element in either 'routes', 'agencies' or 'routeShortNames'.".formatted(type)
+        "%s must contain at least one element in either 'routes', 'agencies' or 'routeShortNames'.".formatted(
+            type
+          )
       );
     }
 

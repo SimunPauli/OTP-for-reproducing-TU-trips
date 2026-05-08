@@ -39,8 +39,8 @@ class DenmarkMapper extends OsmTagMapper {
         case ALL, PEDESTRIAN_AND_CAR -> {
           if (
             hasSidewalk.isMatch(way) ||
-              hasPrefixSidewalk.isLeftMatch(way) ||
-              hasPrefixSidewalk.isRightMatch(way)
+            hasPrefixSidewalk.isLeftMatch(way) ||
+            hasPrefixSidewalk.isRightMatch(way)
           ) {
             yield 1.1;
           }
@@ -632,6 +632,5 @@ class DenmarkMapper extends OsmTagMapper {
     props.setSlopeOverride(new BestMatchSpecifier("tunnel=*"), true);
     props.setSlopeOverride(new BestMatchSpecifier("location=underground"), true);
     props.setSlopeOverride(new BestMatchSpecifier("indoor=yes"), true);
-
   }
 }

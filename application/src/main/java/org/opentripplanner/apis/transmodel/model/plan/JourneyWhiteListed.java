@@ -25,9 +25,9 @@ public class JourneyWhiteListed {
     .name("InputWhiteListed")
     .description(
       "Filter trips by only allowing lines involving certain " +
-        "elements. If both lines and authorities are specified, only one must be valid " +
-        "for each line to be used. If a line is both banned and whitelisted, it will " +
-        "be counted as banned."
+      "elements. If both lines and authorities are specified, only one must be valid " +
+      "for each line to be used. If a line is both banned and whitelisted, it will " +
+      "be counted as banned."
     )
     .field(newIdListInputField("lines", "Set of ids for lines that should be used"))
     .field(newIdListInputField("authorities", "Set of ids for authorities that should be used"))
@@ -60,9 +60,7 @@ public class JourneyWhiteListed {
     } else {
       this.authorityIds = Set.copyOf(idMapper.parseListNullSafe(whiteList.get("authorities")));
       this.lineIds = Set.copyOf(idMapper.parseListNullSafe(whiteList.get("lines")));
-      this.routeShortNames = Set.copyOf(
-        whiteList.getOrDefault("routeShortNames", List.of())
-      );
+      this.routeShortNames = Set.copyOf(whiteList.getOrDefault("routeShortNames", List.of()));
     }
   }
 
@@ -75,7 +73,9 @@ public class JourneyWhiteListed {
     if (authorityIds.isEmpty() && lineIds.isEmpty() && routeShortNames.isEmpty()) {
       return stream;
     }
-    return stream.filter(it -> isTripTimeOnDateAcceptable(it, authorityIds, lineIds, routeShortNames));
+    return stream.filter(it ->
+      isTripTimeOnDateAcceptable(it, authorityIds, lineIds, routeShortNames)
+    );
   }
 
   private static boolean isTripTimeOnDateAcceptable(
@@ -95,9 +95,15 @@ public class JourneyWhiteListed {
     String actualShortName = route.getShortName();
 
     if (!routeShortNames.isEmpty() && actualShortName != null) {
-      System.out.println("Checking Route: " + route.getId() +
-        " | Actual ShortName: [" + actualShortName + "]" +
-        " | Searching for: " + routeShortNames);
+      System.out.println(
+        "Checking Route: " +
+        route.getId() +
+        " | Actual ShortName: [" +
+        actualShortName +
+        "]" +
+        " | Searching for: " +
+        routeShortNames
+      );
     }
 
     // If no filters are set, accept all
@@ -114,7 +120,11 @@ public class JourneyWhiteListed {
       return true;
     }
 
-    if (!routeShortNames.isEmpty() && route.getShortName() != null && routeShortNames.contains(route.getShortName())) {
+    if (
+      !routeShortNames.isEmpty() &&
+      route.getShortName() != null &&
+      routeShortNames.contains(route.getShortName())
+    ) {
       return true;
     }
 

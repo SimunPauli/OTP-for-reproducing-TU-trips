@@ -24,7 +24,6 @@ public class SelectRequest implements Serializable {
   private final List<FeedScopedId> routes;
   private final List<String> routeShortNames;
 
-
   public SelectRequest(Builder builder) {
     if (builder.transportModes.isEmpty()) {
       this.transportModeFilter = null;
@@ -60,9 +59,11 @@ public class SelectRequest implements Serializable {
       return false;
     }
 
-    if (!routeShortNames.isEmpty() &&
+    if (
+      !routeShortNames.isEmpty() &&
       (tripPattern.getRoute().getShortName() == null ||
-      !routeShortNames.contains(tripPattern.getRoute().getShortName()))) {
+        !routeShortNames.contains(tripPattern.getRoute().getShortName()))
+    ) {
       return false;
     }
 

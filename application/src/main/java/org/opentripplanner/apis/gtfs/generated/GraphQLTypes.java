@@ -1156,7 +1156,9 @@ public class GraphQLTypes {
       return this.RAIL;
     }
 
-    public Double getGraphQLStrain() {return this.S_TRAIN;}
+    public Double getGraphQLStrain() {
+      return this.S_TRAIN;
+    }
 
     public Double getGraphQLSubway() {
       return this.SUBWAY;
@@ -1214,7 +1216,9 @@ public class GraphQLTypes {
       this.RAIL = RAIL;
     }
 
-    public void setGraphQLStrain(Double STRAIN) {this.S_TRAIN = S_TRAIN;}
+    public void setGraphQLStrain(Double STRAIN) {
+      this.S_TRAIN = S_TRAIN;
+    }
 
     public void setGraphQLSubway(Double SUBWAY) {
       this.SUBWAY = SUBWAY;
@@ -5219,6 +5223,7 @@ public class GraphQLTypes {
     private List<String> agencies;
     private List<String> routes;
     private List<String> routeShortNames;
+
     public GraphQLTransitFilterSelectInput(Map<String, Object> args) {
       if (args != null) {
         this.agencies = (List<String>) args.get("agencies");
@@ -5235,7 +5240,9 @@ public class GraphQLTypes {
       return this.routes;
     }
 
-    public List<String> getGraphQLRouteShortNames() { return this.routeShortNames; }
+    public List<String> getGraphQLRouteShortNames() {
+      return this.routeShortNames;
+    }
 
     public void setGraphQLAgencies(List<String> agencies) {
       this.agencies = agencies;
@@ -5245,7 +5252,9 @@ public class GraphQLTypes {
       this.routes = routes;
     }
 
-    public void setGraphQLRouteShortNames(List<String> routeShortNames) { this.routeShortNames = routeShortNames; }
+    public void setGraphQLRouteShortNames(List<String> routeShortNames) {
+      this.routeShortNames = routeShortNames;
+    }
   }
 
   /**
