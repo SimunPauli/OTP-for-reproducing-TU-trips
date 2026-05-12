@@ -5223,12 +5223,14 @@ public class GraphQLTypes {
     private List<String> agencies;
     private List<String> routes;
     private List<String> routeShortNames;
+    private List<String> stops;
 
     public GraphQLTransitFilterSelectInput(Map<String, Object> args) {
       if (args != null) {
         this.agencies = (List<String>) args.get("agencies");
         this.routes = (List<String>) args.get("routes");
         this.routeShortNames = (List<String>) args.get("routeShortNames");
+        this.stops = (List<String>) args.get("stops");
       }
     }
 
@@ -5244,6 +5246,10 @@ public class GraphQLTypes {
       return this.routeShortNames;
     }
 
+    public List<String> getGraphQLStops() {
+      return this.stops;
+    }
+
     public void setGraphQLAgencies(List<String> agencies) {
       this.agencies = agencies;
     }
@@ -5254,6 +5260,10 @@ public class GraphQLTypes {
 
     public void setGraphQLRouteShortNames(List<String> routeShortNames) {
       this.routeShortNames = routeShortNames;
+    }
+
+    public void setGraphQLStops(List<String> stops) {
+      this.stops = stops;
     }
   }
 

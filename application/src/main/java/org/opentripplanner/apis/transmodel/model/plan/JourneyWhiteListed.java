@@ -45,11 +45,13 @@ public class JourneyWhiteListed {
         .defaultValue(List.of())
         .build()
     )
+    .field(newIdListInputField("stops", "Set of ids for stops that should be used"))
     .build();
 
   public final Set<FeedScopedId> authorityIds;
   public final Set<FeedScopedId> lineIds;
   public final Set<String> routeShortNames;
+  public final Set<FeedScopedId> stopsIds;
 
   public JourneyWhiteListed(DataFetchingEnvironment environment, FeedScopedIdMapper idMapper) {
     Map<String, List<String>> whiteList = environment.getArgument("whiteListed");
@@ -57,10 +59,12 @@ public class JourneyWhiteListed {
       this.authorityIds = Set.of();
       this.lineIds = Set.of();
       this.routeShortNames = Set.of();
+      this.stopsIds = Set.of();
     } else {
       this.authorityIds = Set.copyOf(idMapper.parseListNullSafe(whiteList.get("authorities")));
       this.lineIds = Set.copyOf(idMapper.parseListNullSafe(whiteList.get("lines")));
       this.routeShortNames = Set.copyOf(whiteList.getOrDefault("routeShortNames", List.of()));
+      this.stopsIds = Set.copyOf(idMapper.parseListNullSafe(whiteList.get("stops")));
     }
   }
 
@@ -68,13 +72,16 @@ public class JourneyWhiteListed {
     Stream<TripTimeOnDate> stream,
     Collection<FeedScopedId> authorityIds,
     Collection<FeedScopedId> lineIds,
-    Collection<String> routeShortNames
+    Collection<String> routeShortNames,
+    Collection<FeedScopedId> stopsIds
   ) {
-    if (authorityIds.isEmpty() && lineIds.isEmpty() && routeShortNames.isEmpty()) {
+    if (
+      authorityIds.isEmpty() && lineIds.isEmpty() && routeShortNames.isEmpty() && stopsIds.isEmpty()
+    ) {
       return stream;
     }
     return stream.filter(it ->
-      isTripTimeOnDateAcceptable(it, authorityIds, lineIds, routeShortNames)
+      isTripTimeOnDateAcceptable(it, authorityIds, lineIds, routeShortNames, stopsIds)
     );
   }
 
@@ -82,7 +89,8 @@ public class JourneyWhiteListed {
     TripTimeOnDate tts,
     Collection<FeedScopedId> authorityIds,
     Collection<FeedScopedId> lineIds,
-    Collection<String> routeShortNames
+    Collection<String> routeShortNames,
+    Collection<FeedScopedId> stopsIds
   ) {
     Trip trip = tts.getTrip();
 
@@ -107,7 +115,9 @@ public class JourneyWhiteListed {
     }
 
     // If no filters are set, accept all
-    if (authorityIds.isEmpty() && lineIds.isEmpty() && routeShortNames.isEmpty()) {
+    if (
+      authorityIds.isEmpty() && lineIds.isEmpty() && routeShortNames.isEmpty() && stopsIds.isEmpty()
+    ) {
       return true;
     }
 

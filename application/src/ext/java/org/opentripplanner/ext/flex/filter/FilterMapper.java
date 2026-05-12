@@ -16,8 +16,10 @@ public class FilterMapper {
 
   private final List<FeedScopedId> excludedAgencies = new ArrayList<>();
   private final List<FeedScopedId> excludedRoutes = new ArrayList<>();
+  private final List<FeedScopedId> excludedStops = new ArrayList<>();
   private final List<FeedScopedId> selectedAgencies = new ArrayList<>();
   private final List<FeedScopedId> selectedRoutes = new ArrayList<>();
+  private final List<FeedScopedId> selectedStops = new ArrayList<>();
 
   private FilterMapper() {}
 
@@ -44,11 +46,17 @@ public class FilterMapper {
     if (!selectedRoutes.isEmpty()) {
       builder.withIncludeRoutes(selectedRoutes);
     }
+    if (!selectedStops.isEmpty()) {
+      builder.withIncludeStops(selectedStops);
+    }
     if (!excludedAgencies.isEmpty()) {
       builder.withExcludeAgencies(excludedAgencies);
     }
     if (!excludedRoutes.isEmpty()) {
       builder.withExcludeRoutes(excludedRoutes);
+    }
+    if (!excludedStops.isEmpty()) {
+      builder.withExcludeStops(excludedStops);
     }
     return builder.build();
   }
@@ -59,12 +67,14 @@ public class FilterMapper {
       .forEach(s -> {
         excludedRoutes.addAll(s.routes());
         excludedAgencies.addAll(s.agencies());
+        excludedStops.addAll(s.stops());
       });
     sr
       .select()
       .forEach(s -> {
         selectedRoutes.addAll(s.routes());
         selectedAgencies.addAll(s.agencies());
+        selectedStops.addAll(s.stops());
       });
   }
 }

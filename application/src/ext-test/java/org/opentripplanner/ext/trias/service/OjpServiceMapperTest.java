@@ -44,7 +44,9 @@ class OjpServiceMapperTest {
     assertThat(params.includedAgencies()).isEmpty();
     assertThat(params.excludedAgencies()).isEmpty();
     assertThat(params.includedRoutes()).isEmpty();
-    assertThat(params.excludedAgencies()).isEmpty();
+    assertThat(params.excludedRoutes()).isEmpty();
+    assertThat(params.includedStops()).isEmpty();
+    assertThat(params.excludedStops()).isEmpty();
     assertThat(params.includedModes()).isEmpty();
     assertThat(params.excludedModes()).isEmpty();
     assertEquals(OjpServiceMapper.DEFAULT_RADIUS_METERS, params.maximumWalkDistance());
@@ -112,7 +114,9 @@ class OjpServiceMapperTest {
     assertThat(params.includedAgencies()).isEmpty();
     assertThat(params.excludedAgencies()).isEmpty();
     assertThat(params.includedRoutes()).isEmpty();
+    assertThat(params.includedStops()).isEmpty();
     assertEquals(Set.of(LINE_ID), params.excludedRoutes());
+    assertThat(params.excludedStops()).isEmpty();
     assertThat(params.includedModes()).isEmpty();
     assertThat(params.excludedModes()).isEmpty();
   }
@@ -131,6 +135,8 @@ class OjpServiceMapperTest {
     );
     assertThat(params.includedAgencies()).isEmpty();
     assertThat(params.excludedAgencies()).isEmpty();
+    assertThat(params.includedStops()).isEmpty();
+    assertThat(params.excludedStops()).isEmpty();
     assertEquals(Set.of(LINE_ID), params.includedRoutes());
     assertThat(params.excludedRoutes()).isEmpty();
     assertThat(params.includedModes()).isEmpty();
@@ -155,6 +161,8 @@ class OjpServiceMapperTest {
     assertThat(params.excludedAgencies()).isEmpty();
     assertThat(params.includedRoutes()).isEmpty();
     assertThat(params.excludedRoutes()).isEmpty();
+    assertThat(params.includedStops()).isEmpty();
+    assertThat(params.excludedStops()).isEmpty();
     assertThat(params.includedModes()).isEmpty();
     assertEquals(Set.of(BUS, FERRY), params.excludedModes());
   }
@@ -175,6 +183,8 @@ class OjpServiceMapperTest {
     assertThat(params.excludedAgencies()).isEmpty();
     assertThat(params.includedRoutes()).isEmpty();
     assertThat(params.excludedRoutes()).isEmpty();
+    assertThat(params.includedStops()).isEmpty();
+    assertThat(params.excludedStops()).isEmpty();
     assertEquals(Set.of(BUS), params.includedModes());
     assertThat(params.excludedModes()).isEmpty();
   }

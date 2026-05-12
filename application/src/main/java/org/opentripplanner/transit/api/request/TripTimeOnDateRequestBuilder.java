@@ -17,9 +17,11 @@ public class TripTimeOnDateRequestBuilder {
 
   private static final String INCLUDE_AGENCIES = "includeAgencies";
   private static final String INCLUDE_ROUTES = "includeRoutes";
+  private static final String INCLUDE_STOPS = "includeStops";
   private static final String EXCLUDE_AGENCIES = "excludeAgencies";
   private static final String INCLUDE_MODES = "includeModes";
   private static final String EXCLUDE_ROUTES = "excludeRoutes";
+  private static final String EXCLUDE_STOPS = "excludeStops";
   private static final String EXCLUDE_MODES = "excludeModes";
   private final Collection<StopLocation> stopLocations;
   private FilterValues<FeedScopedId> includeAgencies = FilterValues.ofNullIsEverything(
@@ -30,6 +32,10 @@ public class TripTimeOnDateRequestBuilder {
     INCLUDE_ROUTES,
     null
   );
+  private FilterValues<FeedScopedId> includeStops = FilterValues.ofNullIsEverything(
+    INCLUDE_STOPS,
+    null
+  );
   private FilterValues<FeedScopedId> excludeAgencies = FilterValues.ofEmptyIsEverything(
     EXCLUDE_AGENCIES,
     List.of()
@@ -38,6 +44,11 @@ public class TripTimeOnDateRequestBuilder {
     EXCLUDE_ROUTES,
     List.of()
   );
+  private FilterValues<FeedScopedId> excludeStops = FilterValues.ofEmptyIsEverything(
+    EXCLUDE_STOPS,
+    List.of()
+  );
+
   private FilterValues<TransitMode> includeModes = FilterValues.ofNullIsEverything(
     INCLUDE_MODES,
     null
@@ -73,6 +84,11 @@ public class TripTimeOnDateRequestBuilder {
     return this;
   }
 
+  public TripTimeOnDateRequestBuilder withIncludeStops(@Nullable Collection<FeedScopedId> stops) {
+    this.includeStops = FilterValues.ofNullIsEverything(INCLUDE_STOPS, stops);
+    return this;
+  }
+
   public TripTimeOnDateRequestBuilder withExcludeAgencies(Collection<FeedScopedId> agencies) {
     this.excludeAgencies = FilterValues.ofEmptyIsEverything(EXCLUDE_AGENCIES, agencies);
     return this;
@@ -80,6 +96,11 @@ public class TripTimeOnDateRequestBuilder {
 
   public TripTimeOnDateRequestBuilder withExcludeRoutes(Collection<FeedScopedId> routes) {
     this.excludeRoutes = FilterValues.ofEmptyIsEverything(EXCLUDE_ROUTES, routes);
+    return this;
+  }
+
+  public TripTimeOnDateRequestBuilder withExcludeStops(Collection<FeedScopedId> stops) {
+    this.excludeStops = FilterValues.ofEmptyIsEverything(EXCLUDE_STOPS, stops);
     return this;
   }
 
@@ -123,8 +144,10 @@ public class TripTimeOnDateRequestBuilder {
       sortOrder,
       includeAgencies,
       includeRoutes,
+      includeStops,
       excludeAgencies,
       excludeRoutes,
+      excludeStops,
       includeModes,
       excludeModes
     );

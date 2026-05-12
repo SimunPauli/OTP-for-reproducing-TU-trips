@@ -375,6 +375,7 @@ public class StopPlaceType {
                   whiteListed.authorityIds,
                   whiteListed.lineIds,
                   whiteListed.routeShortNames,
+                  whiteListed.stopsIds,
                   transitModes,
                   environment
                 )
@@ -419,6 +420,7 @@ public class StopPlaceType {
     Collection<FeedScopedId> authorityIdsWhiteListed,
     Collection<FeedScopedId> lineIdsWhiteListed,
     Set<String> routeShortNamesWhiteListed,
+    Collection<FeedScopedId> stopsIdsWhiteListed,
     Collection<TransitMode> transitModes,
     DataFetchingEnvironment environment
   ) {
@@ -445,7 +447,8 @@ public class StopPlaceType {
       tripTimesStream,
       authorityIdsWhiteListed,
       lineIdsWhiteListed,
-      routeShortNamesWhiteListed
+      routeShortNamesWhiteListed,
+      stopsIdsWhiteListed
     );
 
     return limitPerLineAndDestinationDisplay(

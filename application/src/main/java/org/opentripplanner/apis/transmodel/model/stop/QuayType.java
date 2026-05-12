@@ -310,6 +310,7 @@ public class QuayType {
               whiteListed.authorityIds,
               whiteListed.lineIds,
               whiteListed.routeShortNames,
+              whiteListed.stopsIds,
               transitModes,
               environment
             )

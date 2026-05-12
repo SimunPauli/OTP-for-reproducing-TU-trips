@@ -19,8 +19,10 @@ public class TripTimeOnDateRequest {
   private final Instant time;
   private final FilterValues<FeedScopedId> includeAgencies;
   private final FilterValues<FeedScopedId> includeRoutes;
+  private final FilterValues<FeedScopedId> includeStops;
   private final FilterValues<FeedScopedId> excludeAgencies;
   private final FilterValues<FeedScopedId> excludeRoutes;
+  private final FilterValues<FeedScopedId> excludeStops;
   private final FilterValues<TransitMode> includeModes;
   private final FilterValues<TransitMode> excludeModes;
   private final Duration timeWindow;
@@ -37,8 +39,10 @@ public class TripTimeOnDateRequest {
     Comparator<TripTimeOnDate> sortOrder,
     FilterValues<FeedScopedId> includeAgencies,
     FilterValues<FeedScopedId> includeRoutes,
+    FilterValues<FeedScopedId> includeStops,
     FilterValues<FeedScopedId> excludeAgencies,
     FilterValues<FeedScopedId> excludeRoutes,
+    FilterValues<FeedScopedId> excludeStops,
     FilterValues<TransitMode> includeModes,
     FilterValues<TransitMode> excludeModes
   ) {
@@ -50,8 +54,10 @@ public class TripTimeOnDateRequest {
     this.sortOrder = Objects.requireNonNull(sortOrder);
     this.includeAgencies = includeAgencies;
     this.includeRoutes = includeRoutes;
+    this.includeStops = includeStops;
     this.excludeAgencies = excludeAgencies;
     this.excludeRoutes = excludeRoutes;
+    this.excludeStops = excludeStops;
     this.includeModes = includeModes;
     this.excludeModes = excludeModes;
   }
@@ -76,12 +82,20 @@ public class TripTimeOnDateRequest {
     return includeRoutes;
   }
 
+  public FilterValues<FeedScopedId> includeStops() {
+    return includeStops;
+  }
+
   public FilterValues<FeedScopedId> excludeAgencies() {
     return excludeAgencies;
   }
 
   public FilterValues<FeedScopedId> excludeRoutes() {
     return excludeRoutes;
+  }
+
+  public FilterValues<FeedScopedId> excludeStops() {
+    return excludeStops;
   }
 
   public FilterValues<TransitMode> includeModes() {

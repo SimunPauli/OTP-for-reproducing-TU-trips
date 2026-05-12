@@ -20,21 +20,28 @@ public class TripRequest {
   private final FilterValues<FeedScopedId> excludeAgencies;
   private final FilterValues<FeedScopedId> excludeRoutes;
 
+  private final FilterValues<FeedScopedId> excludeStops;
+  private final FilterValues<FeedScopedId> includeStops;
+
   private final FilterValues<String> includeNetexInternalPlanningCodes;
   private final FilterValues<LocalDate> includeServiceDates;
 
   TripRequest(
     FilterValues<FeedScopedId> includeAgencies,
     FilterValues<FeedScopedId> includeRoutes,
+    FilterValues<FeedScopedId> includeStops,
     FilterValues<FeedScopedId> excludeAgencies,
     FilterValues<FeedScopedId> excludeRoutes,
+    FilterValues<FeedScopedId> excludeStops,
     FilterValues<String> includeNetexInternalPlanningCodes,
     FilterValues<LocalDate> includeServiceDates
   ) {
     this.includeAgencies = includeAgencies;
     this.includeRoutes = includeRoutes;
+    this.includeStops = includeStops;
     this.excludeAgencies = excludeAgencies;
     this.excludeRoutes = excludeRoutes;
+    this.excludeStops = excludeStops;
     this.includeNetexInternalPlanningCodes = includeNetexInternalPlanningCodes;
     this.includeServiceDates = includeServiceDates;
   }
@@ -51,12 +58,20 @@ public class TripRequest {
     return includeRoutes;
   }
 
+  public FilterValues<FeedScopedId> includeStops() {
+    return includeStops;
+  }
+
   public FilterValues<FeedScopedId> excludeAgencies() {
     return excludeAgencies;
   }
 
   public FilterValues<FeedScopedId> excludeRoutes() {
     return excludeRoutes;
+  }
+
+  public FilterValues<FeedScopedId> excludeStops() {
+    return excludeStops;
   }
 
   public FilterValues<String> includeNetexInternalPlanningCodes() {
@@ -74,8 +89,10 @@ public class TripRequest {
     return (
       Objects.equals(includeAgencies, that.includeAgencies) &&
       Objects.equals(includeRoutes, that.includeRoutes) &&
+      Objects.equals(includeStops, that.includeStops) &&
       Objects.equals(excludeAgencies, that.excludeAgencies) &&
       Objects.equals(excludeRoutes, that.excludeRoutes) &&
+      Objects.equals(excludeStops, that.excludeStops) &&
       Objects.equals(includeNetexInternalPlanningCodes, that.includeNetexInternalPlanningCodes) &&
       Objects.equals(includeServiceDates, that.includeServiceDates)
     );
@@ -86,8 +103,10 @@ public class TripRequest {
     return Objects.hash(
       includeAgencies,
       includeRoutes,
+      includeStops,
       excludeAgencies,
       excludeRoutes,
+      excludeStops,
       includeNetexInternalPlanningCodes,
       includeServiceDates
     );
@@ -98,8 +117,10 @@ public class TripRequest {
     return ToStringBuilder.of(TripRequest.class)
       .addObj("includeAgencies", includeAgencies)
       .addObj("includeRoutes", includeRoutes)
+      .addObj("includeStops", includeStops)
       .addObj("excludeAgencies", excludeAgencies)
       .addObj("excludeRoutes", excludeRoutes)
+      .addObj("excludeStops", excludeStops)
       .addObj("includeNetexInternalPlanningCodes", includeNetexInternalPlanningCodes)
       .addObj("includeServiceDates", includeServiceDates)
       .toString();

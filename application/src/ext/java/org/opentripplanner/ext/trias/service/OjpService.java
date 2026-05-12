@@ -107,6 +107,7 @@ public class OjpService {
       .withNumberOfDepartures(params.numDepartures)
       .withExcludeAgencies(params.excludedAgencies)
       .withExcludeRoutes(params.excludedRoutes)
+      .withExcludeStops(params.excludedStops)
       .withExcludeModes(params.excludedModes)
       .withSortOrder(TripTimeOnDate.compareByScheduledDeparture());
 
@@ -115,6 +116,9 @@ public class OjpService {
     }
     if (params.includesRoutes()) {
       builder.withIncludeRoutes(params.includedRoutes);
+    }
+    if (params.includesStops()) {
+      builder.withIncludeStops(params.includedStops);
     }
     if (params.includesModes()) {
       builder.withIncludeModes(params.includedModes);
@@ -132,8 +136,10 @@ public class OjpService {
     int numDepartures,
     Set<FeedScopedId> includedAgencies,
     Set<FeedScopedId> includedRoutes,
+    Set<FeedScopedId> includedStops,
     Set<FeedScopedId> excludedAgencies,
     Set<FeedScopedId> excludedRoutes,
+    Set<FeedScopedId> excludedStops,
     Set<TransitMode> includedModes,
     Set<TransitMode> excludedModes
   ) {
@@ -142,6 +148,9 @@ public class OjpService {
     }
     public boolean includesRoutes() {
       return !includedRoutes().isEmpty();
+    }
+    public boolean includesStops() {
+      return !includedStops.isEmpty();
     }
     public boolean includesModes() {
       return !includedModes.isEmpty();

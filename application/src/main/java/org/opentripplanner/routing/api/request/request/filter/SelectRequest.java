@@ -23,6 +23,7 @@ public class SelectRequest implements Serializable {
   private final List<FeedScopedId> groupOfRoutes;
   private final List<FeedScopedId> routes;
   private final List<String> routeShortNames;
+  private final List<FeedScopedId> stops;
 
   public SelectRequest(Builder builder) {
     if (builder.transportModes.isEmpty()) {
@@ -38,6 +39,7 @@ public class SelectRequest implements Serializable {
     this.groupOfRoutes = List.copyOf(builder.groupOfRoutes);
     this.routes = builder.routes;
     this.routeShortNames = List.copyOf(builder.routeShortNames);
+    this.stops = List.copyOf(builder.stops);
   }
 
   public boolean matches(TripPattern tripPattern) {
@@ -64,6 +66,10 @@ public class SelectRequest implements Serializable {
       (tripPattern.getRoute().getShortName() == null ||
         !routeShortNames.contains(tripPattern.getRoute().getShortName()))
     ) {
+      return false;
+    }
+
+    if (!stops.isEmpty() && !tripPattern.containsAnyStopId(stops)) {
       return false;
     }
 
@@ -110,6 +116,7 @@ public class SelectRequest implements Serializable {
       .addObj("transportModes", transportModesToString(), null)
       .addCol("agencies", agencies, List.of())
       .addObj("routes", routes, List.of())
+      .addObj("stops", stops, List.of())
       .toString();
   }
 
@@ -127,6 +134,10 @@ public class SelectRequest implements Serializable {
 
   public List<FeedScopedId> routes() {
     return routes;
+  }
+
+  public List<FeedScopedId> stops() {
+    return stops;
   }
 
   private String transportModesToString() {
@@ -159,6 +170,7 @@ public class SelectRequest implements Serializable {
     private List<FeedScopedId> groupOfRoutes = new ArrayList<>();
     private List<FeedScopedId> routes = new ArrayList<>();
     private List<String> routeShortNames = new ArrayList<>();
+    private List<FeedScopedId> stops = new ArrayList<>();
 
     public Builder withTransportModes(List<MainAndSubMode> transportModes) {
       this.transportModes = transportModes;
@@ -196,6 +208,11 @@ public class SelectRequest implements Serializable {
 
     public Builder withRouteShortNames(List<String> routeShortNames) {
       this.routeShortNames = routeShortNames;
+      return this;
+    }
+
+    public Builder withStops(List<FeedScopedId> stops) {
+      this.stops = stops;
       return this;
     }
 

@@ -90,8 +90,10 @@ public class OjpServiceMapper {
     var timeWindow = timeWindow(ser);
     Set<FeedScopedId> includedAgencies = agencyFilter(ser, o -> !isExclude(o.isExclude()));
     Set<FeedScopedId> includedRoutes = lineFilter(ser, o -> !isExclude(o.isExclude()));
+    Set<FeedScopedId> includedStops = Set.of();
     Set<FeedScopedId> excludedAgencies = agencyFilter(ser, f -> isExclude(f.isExclude()));
     Set<FeedScopedId> excludedRoutes = lineFilter(ser, f -> isExclude(f.isExclude()));
+    Set<FeedScopedId> excludedStops = Set.of();
     Set<TransitMode> includedModes = modeFilter(ser, m -> !isExclude(m.isExclude()));
     Set<TransitMode> excludedModes = modeFilter(ser, m -> isExclude(m.isExclude()));
     int maxWalkDistance = Optional.ofNullable(ser.getLocation())
@@ -116,8 +118,10 @@ public class OjpServiceMapper {
       numResults,
       includedAgencies,
       includedRoutes,
+      includedStops,
       excludedAgencies,
       excludedRoutes,
+      excludedStops,
       includedModes,
       excludedModes
     );
