@@ -101,7 +101,8 @@ public class OsmWay extends OsmEntity {
   }
 
   public boolean isBarrier() {
-    return hasTag("barrier");
+    return false; //barrier tag intentionally ignored
+    //return hasTag("barrier");
   }
 
   @Override

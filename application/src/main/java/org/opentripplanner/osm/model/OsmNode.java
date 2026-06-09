@@ -50,7 +50,8 @@ public class OsmNode extends OsmEntity {
    * @return true if it does
    */
   public boolean isBarrier() {
-    return overridePermissions(ALL) != ALL;
+    return false; //barrier tag intentionally ignored
+    //return overridePermissions(ALL) != ALL;
   }
 
   /**

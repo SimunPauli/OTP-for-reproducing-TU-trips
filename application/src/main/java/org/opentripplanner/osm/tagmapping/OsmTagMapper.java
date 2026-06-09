@@ -821,7 +821,7 @@ public class OsmTagMapper {
   }
 
   public boolean doesTagValueDisallowThroughTraffic(String tagValue) {
-    return(false);
+    return(false); // access tag intentionally ignored
 //    return (
 //      "no".equals(tagValue) ||
 //      "destination".equals(tagValue) ||
