@@ -821,13 +821,14 @@ public class OsmTagMapper {
   }
 
   public boolean doesTagValueDisallowThroughTraffic(String tagValue) {
-    return (
-      "no".equals(tagValue) ||
-      "destination".equals(tagValue) ||
-      "private".equals(tagValue) ||
-      "customers".equals(tagValue) ||
-      "delivery".equals(tagValue)
-    );
+    return(false);
+//    return (
+//      "no".equals(tagValue) ||
+//      "destination".equals(tagValue) ||
+//      "private".equals(tagValue) ||
+//      "customers".equals(tagValue) ||
+//      "delivery".equals(tagValue)
+//    );
   }
 
   public float getCarSpeedForWay(OsmEntity way, TraverseDirection direction) {
