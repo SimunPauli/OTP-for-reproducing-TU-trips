@@ -559,7 +559,7 @@ class DenmarkMapper extends OsmTagMapper {
      * The national speed limit is 80 km/h in rural areas and 50 km/h i urban areas.
      * Normally the speed limit is signed explicit, and the national speed limits don't apply.
      * Design speed for new motorways are 130 km/h, and 90 km/h for motorroads (normally).
-     * Legal speed limit for pedestrian and living streets is walking pace.
+     * Legal speed limit for pedestrian/living streets is walking pace.
      */
 
     props.setCarSpeed(
