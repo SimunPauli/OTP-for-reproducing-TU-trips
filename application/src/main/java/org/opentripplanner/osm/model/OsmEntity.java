@@ -643,7 +643,7 @@ public class OsmEntity {
       return Optional.empty();
     }
 
-    if ("foot".equals(mode) && !isOneOfTags("highway", Set.of("footway", "step", "corridor"))) {
+    if ("foot".equals(mode) && !isOneOfTags("highway", Set.of("footway", "steps", "corridor"))) {
       return Optional.empty();
     }
 
@@ -844,21 +844,21 @@ public class OsmEntity {
     if (isOneOfTags("highway", NON_ROUTABLE_HIGHWAYS)) {
       return false;
     } else if (hasTag("highway") || isPlatform() || isIndoorRoutable()) {
-      if (
-        isGeneralAccessDenied(DIRECTIONLESS) &&
-        isGeneralAccessDenied(TraverseDirection.FORWARD) &&
-        isGeneralAccessDenied(TraverseDirection.BACKWARD)
-      ) {
-        // There are exceptions.
-        for (var mode : CHECKED_MODES) {
-          for (var direction : TraverseDirection.values()) {
-            if (checkModePermission(mode, direction).equals(Optional.of(ALLOW))) {
-              return true;
-            }
-          }
-        }
-        return false;
-      }
+//      if (
+//        isGeneralAccessDenied(DIRECTIONLESS) &&
+//        isGeneralAccessDenied(TraverseDirection.FORWARD) &&
+//        isGeneralAccessDenied(TraverseDirection.BACKWARD)
+//      ) {
+//        // There are exceptions.
+//        for (var mode : CHECKED_MODES) {
+//          for (var direction : TraverseDirection.values()) {
+//            if (checkModePermission(mode, direction).equals(Optional.of(ALLOW))) {
+//              return true;
+//            }
+//          }
+//        }
+//        return false;
+//      }
       return true;
     }
 
