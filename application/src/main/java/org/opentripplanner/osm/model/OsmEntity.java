@@ -47,15 +47,15 @@ public class OsmEntity {
     "raceway",
     "abandoned",
     "historic",
-    "no",
+//    "no",
     "emergency_bay",
-    "rest_area",
-    "services",
+//    "rest_area",
+//    "services",
     "bus_guideway",
     "escape"
   );
 
-  private static final Set<String> INDOOR_ROUTABLE_VALUES = Set.of("corridor", "area");
+  private static final Set<String> INDOOR_ROUTABLE_VALUES = Set.of("corridor", "area", "footway");
 
   private static final Set<String> LEVEL_TAGS = Set.of("level", "layer");
   private static final Set<String> DEFAULT_LEVEL = Set.of("0");
