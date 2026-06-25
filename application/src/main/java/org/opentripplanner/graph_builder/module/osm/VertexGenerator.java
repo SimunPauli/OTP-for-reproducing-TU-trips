@@ -277,7 +277,7 @@ class VertexGenerator {
 
   void initNodesInBarrierWays() {
     for (OsmWay way : osmdb.getWays()) {
-      if (way.isBarrier()) {
+      if (way.isBarrier()) { // isBarrier is set to always return false.
         TLongList nodes = way.getNodeRefs();
         boolean isClosed = nodes.get(0) == nodes.get(nodes.size() - 1);
         for (int i = 0; i < nodes.size() - (isClosed ? 1 : 0); i++) {

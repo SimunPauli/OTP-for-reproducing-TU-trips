@@ -77,10 +77,10 @@ public class OsmNode extends OsmEntity {
   public boolean isTaggedBarrierCrossing() {
     return (
       hasTag("barrier") ||
-      hasTag("access") ||
-      hasTag("entrance") ||
-      overridePermissions(ALL) != ALL ||
-      overridePermissions(NONE) != NONE
+//      hasTag("access") || //access tag intentionally ignored
+      hasTag("entrance") // ||
+//      overridePermissions(ALL) != ALL || //access tag intentionally ignored
+//      overridePermissions(NONE) != NONE
     );
   }
 }

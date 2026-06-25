@@ -37,9 +37,9 @@ public class BarrierEdgeBuilder {
     // which allows pedestrians and bikes passing through.
     if (!node.hasTag("barrier")) {
       for (var barrier : barriers) {
-        permission = permission.intersection(
-          barrier.overridePermissions(StreetTraversalPermission.ALL)
-        );
+//        permission = permission.intersection( //barrier overrided intentionally ignored.
+//          barrier.overridePermissions(StreetTraversalPermission.ALL)
+//        );
         wheelchairAccessible = wheelchairAccessible && barrier.isWheelchairAccessible();
         if (!barrier.hasNoName()) {
           name = edgeNamer.getNameForWay(barrier, ("barrier " + barrier.getId()).intern());
@@ -47,7 +47,8 @@ public class BarrierEdgeBuilder {
       }
     }
 
-    permission = node.overridePermissions(permission);
+    // access tag intentionally ignored; only apply explicit barrier-tag permission overrides
+    // permission = node.overridePermissions(permission);
     if (permission.allowsNothing()) {
       return;
     }
