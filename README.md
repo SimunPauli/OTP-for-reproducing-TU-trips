@@ -9,13 +9,13 @@
 
 ## Modifciation of OpenTripPlanner 
 
-This project is a modified version of OpenTripPlanner 2.8.1, designed to integrate scheduled public transit 
-data in Denmark with the Danish National Transportation Survey.
+This project is a modified version of OpenTripPlanner 2.8.1, designed to reproduce trips in the 
+Danish National Travel Survey using scheduled public transit data.
 
 Unlike standard OpenTripPlanner usage, the primary purpose is not route optimization, but the
 reconstruction of respondents’ realized routes.
 
-In addition, the system is used to generate alternative routes for use in route choice models.
+In addition, the system is used to generate choice-set of alternative routes for use in route choice models.
 
 
 ## Original README of OTP
