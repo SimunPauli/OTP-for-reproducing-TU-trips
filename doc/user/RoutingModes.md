@@ -141,6 +141,10 @@ Used for intercity or long-distance travel.
 
 Subway or Metro, used for any underground rail system within a metropolitan area.
 
+<h4 id="S_TRAIN">S_TRAIN</h4>
+
+S-tog (Kopenhavn), S-Bahn (DE), RER (FR)
+
 <h4 id="TAXI">TAXI</h4>
 
 Using a taxi service

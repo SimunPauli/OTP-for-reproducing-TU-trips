@@ -3289,12 +3289,12 @@ enum Mode {
   MONORAIL
   "RAIL"
   RAIL
-  "S-tog (Kopenhavn), S-Bahn (DE), RER (FR)"
-  S_TRAIN
   "SCOOTER"
   SCOOTER
   "SUBWAY"
   SUBWAY
+  "S-tog (Kopenhavn), S-Bahn (DE), RER (FR)"
+  S_TRAIN
   "A taxi, possibly operated by a public transport agency."
   TAXI
   "TRAM"
@@ -3859,10 +3859,10 @@ enum TransitMode {
   MONORAIL
   "This includes long or short distance trains."
   RAIL
-  "S-tog (Kopenhavn), S-Bahn (DE), RER (FR)"
-  S_TRAIN
   "Subway or metro, depending on the local terminology."
   SUBWAY
+  "S-tog (Kopenhavn), S-Bahn (DE), RER (FR)"
+  S_TRAIN
   "A taxi, possibly operated by a public transport agency."
   TAXI
   TRAM
@@ -4258,10 +4258,9 @@ input InputModeWeight {
   MONORAIL: Float
   "The weight of RAIL traverse mode. Values over 1 add cost to rail travel and values under 1 decrease cost"
   RAIL: Float
-
-  S_TRAIN: Float
   "The weight of SUBWAY traverse mode. Values over 1 add cost to subway travel and values under 1 decrease cost"
   SUBWAY: Float
+  S_TRAIN: Float
   "The weight of TAXI traverse mode. Values over 1 add cost to taxi travel and values under 1 decrease cost"
   TAXI: Float
   "The weight of TRAM traverse mode. Values over 1 add cost to tram travel and values under 1 decrease cost"
@@ -4743,17 +4742,14 @@ input TransitFilterSelectInput @oneOf {
   Format: `FeedId:AgencyId`
   """
   agencies: [String!]
+  "Filter by route name. Using route_short_name in GTFS."
+  routeShortNames: [String!]
   """
   Set of ids for routes that should be included in/excluded from the search.
     
   Format: `FeedId:AgencyId`
   """
   routes: [String!]
-
-  """
-  Filter by route name. Using route_short_name in GTFS.
-  """
-  routeShortNames: [String!]
 }
 
 "Costs related to using a transit mode."
