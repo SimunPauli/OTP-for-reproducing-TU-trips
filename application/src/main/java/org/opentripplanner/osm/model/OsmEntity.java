@@ -47,10 +47,10 @@ public class OsmEntity {
     "raceway",
     "abandoned",
     "historic",
-//    "no",
+    //    "no",
     "emergency_bay",
-//    "rest_area",
-//    "services",
+    //    "rest_area",
+    //    "services",
     "bus_guideway",
     "escape"
   );
@@ -844,21 +844,21 @@ public class OsmEntity {
     if (isOneOfTags("highway", NON_ROUTABLE_HIGHWAYS)) {
       return false;
     } else if (hasTag("highway") || isPlatform() || isIndoorRoutable()) {
-//      if (
-//        isGeneralAccessDenied(DIRECTIONLESS) &&
-//        isGeneralAccessDenied(TraverseDirection.FORWARD) &&
-//        isGeneralAccessDenied(TraverseDirection.BACKWARD)
-//      ) {
-//        // There are exceptions.
-//        for (var mode : CHECKED_MODES) {
-//          for (var direction : TraverseDirection.values()) {
-//            if (checkModePermission(mode, direction).equals(Optional.of(ALLOW))) {
-//              return true;
-//            }
-//          }
-//        }
-//        return false;
-//      }
+      //      if (
+      //        isGeneralAccessDenied(DIRECTIONLESS) &&
+      //        isGeneralAccessDenied(TraverseDirection.FORWARD) &&
+      //        isGeneralAccessDenied(TraverseDirection.BACKWARD)
+      //      ) {
+      //        // There are exceptions.
+      //        for (var mode : CHECKED_MODES) {
+      //          for (var direction : TraverseDirection.values()) {
+      //            if (checkModePermission(mode, direction).equals(Optional.of(ALLOW))) {
+      //              return true;
+      //            }
+      //          }
+      //        }
+      //        return false;
+      //      }
       return true;
     }
 

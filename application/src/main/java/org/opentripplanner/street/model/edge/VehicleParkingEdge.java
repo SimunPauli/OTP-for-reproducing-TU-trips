@@ -104,9 +104,9 @@ public class VehicleParkingEdge extends Edge {
     TraverseMode mode
   ) {
     final StreetSearchRequest request = s0.getRequest();
-//    if (!vehicleParking.hasSpacesAvailable(mode, request.wheelchair())) {
-//      return State.empty();
-//    }
+    //    if (!vehicleParking.hasSpacesAvailable(mode, request.wheelchair())) {
+    //      return State.empty();
+    //    }
 
     StateEditor s0e = s0.edit(this);
     s0e.incrementWeight(parkingCost.toSeconds());
@@ -155,9 +155,9 @@ public class VehicleParkingEdge extends Edge {
     OSM might be missing this data, and second people (especailly with bikes) park outside of official
     public parking lots.
     */
-//    if (!vehicleParking.hasSpacesAvailable(s0.currentMode(), s0.getRequest().wheelchair())) {
-//      return State.empty();
-//    }
+    //    if (!vehicleParking.hasSpacesAvailable(s0.currentMode(), s0.getRequest().wheelchair())) {
+    //      return State.empty();
+    //    }
 
     StateEditor s0e = s0.edit(this);
     s0e.incrementWeight(parkingCost.toSeconds());
