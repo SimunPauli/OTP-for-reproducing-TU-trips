@@ -64,36 +64,22 @@ class EscalatorProcessor {
         );
       }
     }
+    // Modified: escalators are always bidirectional, ignoring conveying=forward/backward.
+    // One-way escalators can trap stops, e.g. Forum St. (Metro) platform only reachable by down escalators.
     for (int i = 0; i < nodes.size() - 1; i++) {
-      if (escalatorWay.isForwardEscalator()) {
-        EscalatorEdge.createEscalatorEdge(
-          intersectionNodes.get(nodes.get(i)),
-          intersectionNodes.get(nodes.get(i + 1)),
-          length,
-          duration.orElse(null)
-        );
-      } else if (escalatorWay.isBackwardEscalator()) {
-        EscalatorEdge.createEscalatorEdge(
-          intersectionNodes.get(nodes.get(i + 1)),
-          intersectionNodes.get(nodes.get(i)),
-          length,
-          duration.orElse(null)
-        );
-      } else {
-        EscalatorEdge.createEscalatorEdge(
-          intersectionNodes.get(nodes.get(i)),
-          intersectionNodes.get(nodes.get(i + 1)),
-          length,
-          duration.orElse(null)
-        );
+      EscalatorEdge.createEscalatorEdge(
+        intersectionNodes.get(nodes.get(i)),
+        intersectionNodes.get(nodes.get(i + 1)),
+        length,
+        duration.orElse(null)
+      );
 
-        EscalatorEdge.createEscalatorEdge(
-          intersectionNodes.get(nodes.get(i + 1)),
-          intersectionNodes.get(nodes.get(i)),
-          length,
-          duration.orElse(null)
-        );
-      }
+      EscalatorEdge.createEscalatorEdge(
+        intersectionNodes.get(nodes.get(i + 1)),
+        intersectionNodes.get(nodes.get(i)),
+        length,
+        duration.orElse(null)
+      );
     }
   }
 }
