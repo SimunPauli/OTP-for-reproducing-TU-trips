@@ -72,7 +72,11 @@ public class OsmWay extends OsmEntity {
   }
 
   public boolean isEscalator() {
-    return (isTag("highway", "steps") && isOneOfTags("conveying", ESCALATOR_CONVEYING_TAGS));
+    /*escaltors in OSM sometimes create issuce with directions, e.g. it was only possible to go down to
+    Forum station and not up. Since escalator information is irrelevant for the purpose of reconstructing
+    trips they are treated as steps.*/
+    //return (isTag("highway", "steps") && isOneOfTags("conveying", ESCALATOR_CONVEYING_TAGS));
+    return false;
   }
 
   public boolean isForwardEscalator() {
