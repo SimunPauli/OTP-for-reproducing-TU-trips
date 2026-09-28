@@ -24,8 +24,7 @@ import org.opentripplanner.osm.wayproperty.specifier.LogicalOrSpecifier;
  * http://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrunk http://wiki.openstreetmap.org/wiki/Highway:International_equivalence
  *
  * Also pedestrians allowed to walk on cycleways, compared to only bicycles in default.
- * @author seime
- * @see OsmTagMapper
+ * @author SimunPauli
  * @see OsmTagMapper
  */
 class DenmarkMapper extends OsmTagMapper {
