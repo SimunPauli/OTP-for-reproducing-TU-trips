@@ -7,9 +7,9 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/opentripplanner/opentripplanner)](https://hub.docker.com/r/opentripplanner/opentripplanner)
 
 
-## Modifciation of OpenTripPlanner 
+## About this fork
 
-This project is a modified version of OpenTripPlanner 2.8.1, designed to reproduce trips in the 
+This project is a modified version of OpenTripPlanner 2.8.1, designed to reproduce trips in the
 Danish National Travel Survey using scheduled public transit data.
 
 Unlike standard OpenTripPlanner usage, the primary purpose is not route optimization, but the
@@ -17,6 +17,74 @@ reconstruction of respondents’ realized routes.
 
 In addition, the system is used to generate choice-set of alternative routes for use in route choice models.
 
+### What I changed
+
+Reproduction needs the route the respondent actually took, not the route they were permitted to
+take. The changes below are deliberate trade-offs for that purpose and wrong for ordinary trip
+planning — this graph will route through places that are genuinely impassable. See
+`git log v2.8.1..main` for the individual commits.
+
+**Transit API**
+
+- **`S_TRAIN` transit mode.** GTFS `route_type=109` (Copenhagen S-tog) maps to a new `S_TRAIN`
+  mode instead of `RAIL`, so S-trains can be filtered separately from regional and intercity rail.
+  This changes the built graph, not just the API: stock OTP tags these routes `RAIL`.
+- **`routeShortNames` filter.** A new transit select/whitelist filter matching GTFS
+  `route_short_name`, on both the GTFS and Transmodel APIs.
+
+`tu_reconstruct_trips` uses both, so it will not work against a stock OTP jar.
+
+**Street network (OSM)**
+
+- **`access` tags ignored** — no through-traffic restrictions, and general access denial no longer
+  makes a way non-routable (`OsmEntity`, `OsmNode`, `OsmTagMapper`, `BarrierEdgeBuilder`).
+- **`barrier` tags ignored** — barrier nodes and ways no longer restrict permissions
+  (`OsmNode`, `OsmWay`, `BarrierEdgeBuilder`).
+- **Escalators treated as plain steps**, walkable in both directions regardless of `conveying=`.
+  One-way escalators cut off stops — the Forum metro platform was reachable only downwards
+  (`OsmWay.isEscalator()`, `EscalatorProcessor`).
+- **More ways routable** — `highway=no`, `rest_area` and `services` removed from the non-routable
+  list, and indoor `footway` added to the indoor-routable values (`OsmEntity`).
+- **`highway=step` → `highway=steps`** in the foot-mode check (`OsmEntity`) — an upstream typo, and
+  the only change here worth upstreaming.
+
+**Parking**
+
+- **No capacity checks** on vehicle parking — OSM often lacks the data, and cyclists park outside
+  official parking anyway (`VehicleParkingEdge`).
+
+**`DenmarkMapper` tag mapping**
+
+- A new `osmTagMapping: "denmark"` option. It is a copy of upstream's `NorwayMapper`, differing only
+  in the motorway speed (130 km/h instead of 110 km/h). Its main effect comes from the Norwegian
+  rules it inherits: bicycles are allowed on footways and pedestrians on cycleways and bridleways —
+  the latter matching Danish traffic rules. It only applies when the build config selects it.
+
+## Building and running
+
+```
+mvn package     # build; produces otp-shaded/target/otp-shaded-2.8.1.jar
+mvn test        # run tests
+```
+
+OTP resolves `build-config.json`, `router-config.json`, the OSM extract and the GTFS feed relative
+to its **working directory**, so the working directory — not a command-line flag — decides which
+graph is built or served:
+
+```
+java -Xmx100G -jar otp-shaded-2.8.1.jar --buildStreet --save .   # street graph from OSM
+java -Xmx100G -jar otp-shaded-2.8.1.jar --loadStreet --save .    # transit graph on top of streetGraph.obj
+java -Xmx100G -jar otp-shaded-2.8.1.jar --load .                 # serve a built graph.obj
+```
+
+From IntelliJ, run `org.opentripplanner.standalone.OTPMain` with VM options
+`-Djava.util.concurrent.ForkJoinPool.common.parallelism=13 -Xmx100G` and the working directory set
+as above.
+
+Both config files may contain `${VAR}` placeholders; substitution from the process environment is
+an upstream OTP feature (see `doc/user/Configuration.md`), not something this fork adds. Which
+variables this project sets, and how the per-year data directories are laid out, is described in
+the repository root's `README.md`.
 
 ## Original README of OTP
 
