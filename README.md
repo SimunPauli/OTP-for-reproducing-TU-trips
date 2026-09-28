@@ -7,7 +7,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/opentripplanner/opentripplanner)](https://hub.docker.com/r/opentripplanner/opentripplanner)
 
 
-## About this fork
+## Modification of OpenTripPlanner 
 
 This project is a modified version of OpenTripPlanner 2.8.1, designed to reproduce trips in the
 Danish National Travel Survey using scheduled public transit data.
