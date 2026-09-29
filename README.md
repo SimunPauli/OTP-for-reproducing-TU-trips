@@ -87,6 +87,7 @@ variables this project sets, and how the per-year data directories are laid out,
 the repository root's `README.md`.
 
 ## Original README of OTP
+[Link to original OTP repository](https://github.com/opentripplanner/OpenTripPlanner)
 
 OpenTripPlanner (OTP) is an open source multi-modal trip planner, focusing on travel by scheduled
 public transportation in combination with bicycling, walking, and mobility services including bike
