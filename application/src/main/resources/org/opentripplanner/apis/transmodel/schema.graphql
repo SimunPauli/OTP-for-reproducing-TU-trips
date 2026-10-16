@@ -2063,7 +2063,7 @@ input InputBanned {
   authorities: [ID] = []
   "Set of ids for lines that should not be used"
   lines: [ID] = []
-  "NOT IMPLEMENTED. Set of ids of quays that should not be allowed for boarding or alighting. Trip patterns that travel through the quay will still be permitted."
+  "Set of ids of quays that should not be allowed for boarding or alighting. Trip patterns that travel through the quay will still be permitted."
   quays: [ID] = []
   "NOT IMPLEMENTED. Set of ids of quays that should not be allowed for boarding, alighting or traveling thorugh."
   quaysHard: [ID] = []

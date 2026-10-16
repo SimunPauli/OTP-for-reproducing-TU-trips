@@ -11,6 +11,7 @@ import graphql.schema.DataFetchingEnvironment;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.opentripplanner.apis.gtfs.GraphQLRequestContext;
 import org.opentripplanner.apis.gtfs.generated.GraphQLTypes;
@@ -70,9 +71,22 @@ public class RouteRequestMapper {
       setPreferences(preferences, request, isTripPlannedForNow, args, environment)
     );
 
-    request.withJourney(journeyRequestBuilder ->
-      setModes(journeyRequestBuilder, args, environment)
-    );
+    request.withJourney(journeyRequestBuilder -> {
+      setModes(journeyRequestBuilder, args, environment);
+      var transitPreferences = Optional.ofNullable(args.getGraphQLPreferences()).map(
+        GraphQLTypes.GraphQLPlanPreferencesInput::getGraphQLTransit
+      );
+      transitPreferences
+        .map(GraphQLTypes.GraphQLTransitPreferencesInput::getGraphQLExcludeStops)
+        .ifPresent(stops ->
+          journeyRequestBuilder.withTransit(b -> b.withBannedStops(FeedScopedId.parse(stops)))
+        );
+      transitPreferences
+        .map(GraphQLTypes.GraphQLTransitPreferencesInput::getGraphQLExcludeTrips)
+        .ifPresent(trips ->
+          journeyRequestBuilder.withTransit(b -> b.withBannedTrips(FeedScopedId.parse(trips)))
+        );
+    });
 
     // sadly we need to use the raw collection because it is cast to the wrong type
     mapViaPoints(request, environment.getArgument("via"));

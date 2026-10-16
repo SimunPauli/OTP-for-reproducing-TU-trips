@@ -4768,6 +4768,13 @@ input TransitPreferencesInput {
   """
   board: BoardPreferencesInput
   """
+  Ids of stops (`FeedId:StopId`) where boarding and alighting are not allowed. Trips passing
+  through these stops are still allowed.
+  """
+  excludeStops: [String!]
+  "Ids of trips (`FeedId:TripId`) that are not allowed to be used."
+  excludeTrips: [String!]
+  """
   A list of filters for which trips should be included or excluded. A trip will be considered in the
   result if it is included by at least one filter and isn't excluded by another one at the same time.
     

@@ -31,8 +31,15 @@ planning — this graph will route through places that are genuinely impassable.
   This changes the built graph, not just the API: stock OTP tags these routes `RAIL`.
 - **`routeShortNames` filter.** A new transit select/whitelist filter matching GTFS
   `route_short_name`, on both the GTFS and Transmodel APIs.
+- **`excludeStops` filter.** `planConnection` → `preferences.transit.excludeStops`: no boarding or
+  alighting (so no transfers) at the listed stop ids; trips may still pass through them. Applied
+  like the wheelchair stop mask (`RouteRequestTransitDataProviderFilter.filterAvailableStops`).
+  Also backs Transmodel's previously unimplemented `banned.quays`, so it works in the debug UI.
+- **`excludeTrips` filter.** `planConnection` → `preferences.transit.excludeTrips`: the listed trip
+  ids are not used. Exposes OTP's existing `bannedTrips` (Transmodel: `banned.serviceJourneys`).
 
-`tu_reconstruct_trips` uses both, so it will not work against a stock OTP jar.
+`tu_reconstruct_trips` uses `S_TRAIN` and `routeShortNames`, so it will not work against a stock OTP
+jar. It sends `excludeStops`/`excludeTrips` only when given.
 
 **Street network (OSM)**
 

@@ -26,6 +26,7 @@ public class TransitRequest implements Serializable {
     List.of(),
     List.of(),
     List.of(),
+    List.of(),
     DebugRaptor.defaltValue()
   );
 
@@ -35,6 +36,7 @@ public class TransitRequest implements Serializable {
 
   private final List<FeedScopedId> unpreferredRoutes;
   private final List<FeedScopedId> bannedTrips;
+  private final List<FeedScopedId> bannedStops;
   private final List<TransitGroupSelect> priorityGroupsByAgency;
   private final List<TransitGroupSelect> priorityGroupsGlobal;
   private final DebugRaptor raptorDebugging;
@@ -44,6 +46,7 @@ public class TransitRequest implements Serializable {
     List<FeedScopedId> unpreferredAgencies,
     List<FeedScopedId> unpreferredRoutes,
     List<FeedScopedId> bannedTrips,
+    List<FeedScopedId> bannedStops,
     List<TransitGroupSelect> priorityGroupsByAgency,
     List<TransitGroupSelect> priorityGroupsGlobal,
     DebugRaptor raptorDebugging
@@ -52,6 +55,7 @@ public class TransitRequest implements Serializable {
     this.unpreferredAgencies = unpreferredAgencies;
     this.unpreferredRoutes = unpreferredRoutes;
     this.bannedTrips = bannedTrips;
+    this.bannedStops = bannedStops;
     this.priorityGroupsByAgency = priorityGroupsByAgency;
     this.priorityGroupsGlobal = priorityGroupsGlobal;
     this.raptorDebugging = raptorDebugging;
@@ -68,6 +72,11 @@ public class TransitRequest implements Serializable {
   @Deprecated
   public List<FeedScopedId> bannedTrips() {
     return bannedTrips;
+  }
+
+  /** Stops where boarding/alighting is not allowed. Passing through is still allowed. **/
+  public List<FeedScopedId> bannedStops() {
+    return bannedStops;
   }
 
   public List<TransitFilter> filters() {
@@ -130,6 +139,7 @@ public class TransitRequest implements Serializable {
       Objects.equals(unpreferredAgencies, that.unpreferredAgencies) &&
       Objects.equals(unpreferredRoutes, that.unpreferredRoutes) &&
       Objects.equals(bannedTrips, that.bannedTrips) &&
+      Objects.equals(bannedStops, that.bannedStops) &&
       Objects.equals(priorityGroupsByAgency, that.priorityGroupsByAgency) &&
       Objects.equals(priorityGroupsGlobal, that.priorityGroupsGlobal) &&
       Objects.equals(raptorDebugging, that.raptorDebugging)
@@ -143,6 +153,7 @@ public class TransitRequest implements Serializable {
       unpreferredAgencies,
       unpreferredRoutes,
       bannedTrips,
+      bannedStops,
       priorityGroupsByAgency,
       priorityGroupsGlobal,
       raptorDebugging
@@ -156,6 +167,7 @@ public class TransitRequest implements Serializable {
       .addCol("unpreferredAgencies", unpreferredAgencies)
       .addCol("unpreferredRoutes", unpreferredRoutes)
       .addCol("bannedTrips", bannedTrips)
+      .addCol("bannedStops", bannedStops)
       .addCol("priorityGroupsByAgency", priorityGroupsByAgency)
       .addCol("priorityGroupsGlobal", priorityGroupsGlobal)
       .addObj("raptorDebugging", raptorDebugging, DEFAULT.raptorDebugging)

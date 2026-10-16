@@ -5303,6 +5303,8 @@ public class GraphQLTypes {
 
     private GraphQLAlightPreferencesInput alight;
     private GraphQLBoardPreferencesInput board;
+    private List<String> excludeStops;
+    private List<String> excludeTrips;
     private List<GraphQLTransitFilterInput> filters;
     private GraphQLTimetablePreferencesInput timetable;
     private GraphQLTransferPreferencesInput transfer;
@@ -5311,6 +5313,8 @@ public class GraphQLTypes {
       if (args != null) {
         this.alight = new GraphQLAlightPreferencesInput((Map<String, Object>) args.get("alight"));
         this.board = new GraphQLBoardPreferencesInput((Map<String, Object>) args.get("board"));
+        this.excludeStops = (List<String>) args.get("excludeStops");
+        this.excludeTrips = (List<String>) args.get("excludeTrips");
         if (args.get("filters") != null) {
           this.filters = ((List<Map<String, Object>>) args.get("filters")).stream()
             .map(o -> o == null ? null : new GraphQLTransitFilterInput(o))
@@ -5333,6 +5337,14 @@ public class GraphQLTypes {
       return this.board;
     }
 
+    public List<String> getGraphQLExcludeStops() {
+      return this.excludeStops;
+    }
+
+    public List<String> getGraphQLExcludeTrips() {
+      return this.excludeTrips;
+    }
+
     public List<GraphQLTransitFilterInput> getGraphQLFilters() {
       return this.filters;
     }
@@ -5351,6 +5363,14 @@ public class GraphQLTypes {
 
     public void setGraphQLBoard(GraphQLBoardPreferencesInput board) {
       this.board = board;
+    }
+
+    public void setGraphQLExcludeStops(List<String> excludeStops) {
+      this.excludeStops = excludeStops;
+    }
+
+    public void setGraphQLExcludeTrips(List<String> excludeTrips) {
+      this.excludeTrips = excludeTrips;
     }
 
     public void setGraphQLFilters(List<GraphQLTransitFilterInput> filters) {

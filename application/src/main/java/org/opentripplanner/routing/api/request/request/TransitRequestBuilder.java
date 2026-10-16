@@ -16,6 +16,7 @@ public class TransitRequestBuilder {
   private List<FeedScopedId> unpreferredAgencies;
   private List<FeedScopedId> unpreferredRoutes;
   private List<FeedScopedId> bannedTrips;
+  private List<FeedScopedId> bannedStops;
   private List<TransitGroupSelect> priorityGroupsByAgency;
   private List<TransitGroupSelect> priorityGroupsGlobal;
   private DebugRaptor raptorDebugging;
@@ -27,6 +28,7 @@ public class TransitRequestBuilder {
     this.unpreferredAgencies = null;
     this.unpreferredRoutes = null;
     this.bannedTrips = null;
+    this.bannedStops = null;
     this.priorityGroupsByAgency = null;
     this.priorityGroupsGlobal = null;
     this.raptorDebugging = null;
@@ -65,6 +67,11 @@ public class TransitRequestBuilder {
     return this;
   }
 
+  public TransitRequestBuilder withBannedStops(List<FeedScopedId> bannedStops) {
+    this.bannedStops = bannedStops;
+    return this;
+  }
+
   public TransitRequestBuilder addPriorityGroupsGlobal(List<TransitGroupSelect> value) {
     this.priorityGroupsGlobal = value;
     return this;
@@ -91,6 +98,7 @@ public class TransitRequestBuilder {
       ifNotNull(unpreferredAgencies, original.unpreferredAgencies()),
       ifNotNull(unpreferredRoutes, original.unpreferredRoutes()),
       ifNotNull(bannedTrips, original.bannedTrips()),
+      ifNotNull(bannedStops, original.bannedStops()),
       ifNotNull(priorityGroupsByAgency, original.priorityGroupsByAgency()),
       ifNotNull(priorityGroupsGlobal, original.priorityGroupsGlobal()),
       raptorDebugging == null ? original.raptorDebugging() : raptorDebugging

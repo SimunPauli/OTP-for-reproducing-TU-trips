@@ -82,6 +82,9 @@ public class TripRequestMapper {
         callWith.argument("banned.serviceJourneys", (Collection<String> serviceJourneys) ->
           transitBuilder.withBannedTrips(idMapper.parseListNullSafe(serviceJourneys))
         );
+        callWith.argument("banned.quays", (Collection<String> quays) ->
+          transitBuilder.withBannedStops(idMapper.parseListNullSafe(quays))
+        );
 
         if (GqlUtil.hasArgument(environment, "filters")) {
           transitBuilder.setFilters(

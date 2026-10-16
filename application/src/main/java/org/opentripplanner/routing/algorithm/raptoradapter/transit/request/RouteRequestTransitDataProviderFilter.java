@@ -39,6 +39,8 @@ public class RouteRequestTransitDataProviderFilter implements TransitDataProvide
 
   private final Set<FeedScopedId> bannedTrips;
 
+  private final Set<FeedScopedId> bannedStops;
+
   private final boolean hasSubModeFilters;
 
   public RouteRequestTransitDataProviderFilter(RouteRequest request) {
@@ -50,6 +52,7 @@ public class RouteRequestTransitDataProviderFilter implements TransitDataProvide
       request.preferences().transit().includePlannedCancellations(),
       request.preferences().transit().includeRealtimeCancellations(),
       Set.copyOf(request.journey().transit().bannedTrips()),
+      Set.copyOf(request.journey().transit().bannedStops()),
       request.journey().transit().filters()
     );
   }
@@ -65,6 +68,30 @@ public class RouteRequestTransitDataProviderFilter implements TransitDataProvide
     Set<FeedScopedId> bannedTrips,
     List<TransitFilter> filters
   ) {
+    this(
+      requireBikesAllowed,
+      requireCarsAllowed,
+      wheelchairEnabled,
+      wheelchairPreferences,
+      includePlannedCancellations,
+      includeRealtimeCancellations,
+      bannedTrips,
+      Set.of(), // not testing bannedStops
+      filters
+    );
+  }
+
+  public RouteRequestTransitDataProviderFilter(
+    boolean requireBikesAllowed,
+    boolean requireCarsAllowed,
+    boolean wheelchairEnabled,
+    WheelchairPreferences wheelchairPreferences,
+    boolean includePlannedCancellations,
+    boolean includeRealtimeCancellations,
+    Set<FeedScopedId> bannedTrips,
+    Set<FeedScopedId> bannedStops,
+    List<TransitFilter> filters
+  ) {
     this.requireBikesAllowed = requireBikesAllowed;
     this.requireCarsAllowed = requireCarsAllowed;
     this.wheelchairEnabled = wheelchairEnabled;
@@ -72,6 +99,7 @@ public class RouteRequestTransitDataProviderFilter implements TransitDataProvide
     this.includePlannedCancellations = includePlannedCancellations;
     this.includeRealtimeCancellations = includeRealtimeCancellations;
     this.bannedTrips = bannedTrips;
+    this.bannedStops = bannedStops;
     this.filters = filters.toArray(TransitFilter[]::new);
     this.hasSubModeFilters = filters.stream().anyMatch(TransitFilter::isSubModePredicate);
   }
@@ -182,8 +210,17 @@ public class RouteRequestTransitDataProviderFilter implements TransitDataProvide
       result = (BitSet) result.clone();
       // Use the and bitwise operator to add false flag to all stops that are not accessible by wheelchair
       result.and(tripPattern.getWheelchairAccessible());
-
-      return result;
+    }
+    if (!bannedStops.isEmpty()) {
+      var pattern = tripPattern.getPattern();
+      for (int i = 0; i < pattern.numberOfStops(); i++) {
+        if (bannedStops.contains(pattern.getStop(i).getId())) {
+          if (result == boardingPossible) {
+            result = (BitSet) result.clone();
+          }
+          result.clear(i);
+        }
+      }
     }
     return result;
   }

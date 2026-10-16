@@ -22,7 +22,7 @@ public class BannedInputType {
     .field(
       GqlUtil.newIdListInputField(
         "quays",
-        "NOT IMPLEMENTED. Set of ids of quays that should not be allowed for boarding or alighting. Trip patterns " +
+        "Set of ids of quays that should not be allowed for boarding or alighting. Trip patterns " +
         "that travel through the quay will still be permitted."
       )
     )
