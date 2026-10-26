@@ -10,7 +10,6 @@ import java.util.function.Consumer;
 import org.opentripplanner.framework.model.Cost;
 import org.opentripplanner.framework.model.Units;
 import org.opentripplanner.routing.algorithm.transferoptimization.api.TransferOptimizationParameters;
-import org.opentripplanner.utils.time.DurationUtils;
 import org.opentripplanner.utils.tostring.ToStringBuilder;
 
 /**
@@ -23,6 +22,8 @@ public final class TransferPreferences implements Serializable {
 
   public static final TransferPreferences DEFAULT = new TransferPreferences();
   private static final int MAX_NUMBER_OF_TRANSFERS = 30;
+  // Negative slack lets a transfer reach a (delayed) vehicle scheduled to leave before arrival.
+  private static final Duration MIN_SLACK = Duration.ofMinutes(-5);
 
   private final Cost cost;
   private final Duration slack;
@@ -44,7 +45,12 @@ public final class TransferPreferences implements Serializable {
 
   private TransferPreferences(Builder builder) {
     this.cost = builder.cost;
-    this.slack = DurationUtils.requireNonNegative(builder.slack);
+    if (builder.slack.compareTo(MIN_SLACK) < 0) {
+      throw new IllegalArgumentException(
+        "Transfer slack must be at least " + MIN_SLACK + ": " + builder.slack
+      );
+    }
+    this.slack = builder.slack;
     this.waitReluctance = Units.reluctance(builder.waitReluctance);
     this.maxTransfers = Units.count(builder.maxTransfers, MAX_NUMBER_OF_TRANSFERS);
     this.maxAdditionalTransfers = Units.count(
