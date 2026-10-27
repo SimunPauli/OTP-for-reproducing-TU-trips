@@ -72,8 +72,9 @@ public class TransitPreferencesMapper {
       }
       var slack = transfer.getGraphQLSlack();
       if (slack != null) {
-        // Lower bound (may be negative) is checked in TransferPreferences.
-        transferPreferences.withSlack(slack);
+        transferPreferences.withSlack(
+          DurationUtils.requireNonNegativeMax2hours(slack, "transfer slack")
+        );
       }
       var maxTransfers = transfer.getGraphQLMaximumTransfers();
       if (maxTransfers != null) {
