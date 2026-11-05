@@ -60,6 +60,14 @@ jar. It sends `excludeStops`/`excludeTrips` only when given.
 - **No capacity checks** on vehicle parking — OSM often lacks the data, and cyclists park outside
   official parking anyway (`VehicleParkingEdge`).
 
+**Transfers**
+
+- **`transferSlack` not added to `min_transfer_time`.** A GTFS `transfers.txt` minimum transfer time
+  now gives `max(min_transfer_time, walk + transferSlack)` instead of
+  `max(min_transfer_time + transferSlack, walk + transferSlack)`, so same-stop transfers need
+  `max(min_transfer_time, transferSlack)`. Rejseplan's same-stop values are flat per-agency buffers
+  (e.g. 240 s for most bus agencies) that otherwise stack with the slack (`TransferConstraint`).
+
 **`DenmarkMapper` tag mapping**
 
 - A new `osmTagMapping: "denmark"` option. It is a copy of upstream's `NorwayMapper`, differing only

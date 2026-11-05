@@ -134,7 +134,7 @@ public class TransferConstraintTest {
     // Extra user transfer-time
     int dt = 240;
     // Expected arrival-time with minTransferTime constrained transfer
-    int expAt = t0 + dt + MIN_TX_TIME.getMinTransferTime();
+    int expAt = t0 + MIN_TX_TIME.getMinTransferTime();
     // Regular transfer with arrival time 1 second before MIN_TRANSFER_TIME constrained transfer
     int txMinus = expAt - 1;
     IntSupplier txMinusOp = () -> txMinus;
@@ -165,7 +165,7 @@ public class TransferConstraintTest {
     // Extra user transfer-time
     int dt = 240;
     // Expected arrival-time with minTransferTime constrained transfer
-    int expAt = t0 - (dt + MIN_TX_TIME.getMinTransferTime());
+    int expAt = t0 - MIN_TX_TIME.getMinTransferTime();
     // Regular transfer with arrival time 1 second before MIN_TRANSFER_TIME constrained transfer
     int txMinus = expAt + 1;
     IntSupplier txMinusOp = () -> txMinus;

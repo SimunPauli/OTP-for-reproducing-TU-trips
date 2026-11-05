@@ -222,7 +222,8 @@ public class TransferConstraint implements Serializable, RaptorTransferConstrain
 
     // Ignore transfer, board and alight slack for min-transfer-time
     if (isMinTransferTimeSet()) {
-      int minTransferTime = getMinTransferTime() + transferSlack;
+      //    int minTransferTime = getMinTransferTime() + transferSlack;
+      int minTransferTime = getMinTransferTime();
       if (direction.isForward()) {
         int minTransferBoardTime = sourceTransitArrivalTime + minTransferTime;
         return OTPFeature.MinimumTransferTimeIsDefinitive.isOn()
